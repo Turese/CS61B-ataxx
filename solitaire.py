@@ -214,10 +214,7 @@ class Deck(object):
 			card.set_side(0)
 
 	def shuffle(self):
-		for i in range(3):
-			for i in range(52):
-				temp = self.deck.pop(i)
-				self.deck.insert(random.randint(0, 51), temp)
+		random.shuffle(self.deck)
 
 	#prints the names of all cards in deck in whatever order they're currently in
 	def list(self):
@@ -280,30 +277,6 @@ class Game(object):
 			if len(self.stacks[i]) > 0:
 				if self.stacks[i][len(self.stacks[i]) - 1].side == 0:
 					self.stacks[i][len(self.stacks[i]) - 1].set_side(1)
-
-	#Compares 2 cards, returns 1 if A is bigger or equal, 0 if B is bigger
-	def CompareCards(self, A, B):
-		if A.Value() >= B.Value():
-			return 1
-		else:
-			return 0
-
-	#Compares 2 cards as if A is being moved beneath B in a stack. 
-	#Returns true if it is a valid move, false otherwise
-	def CheckStacks(self, A, B):
-		if A.Color() != B.Color(): 
-			if A.Value() == (B.Value() - 1):
-				return true
-		else:
-			return false
-	#Compares 2 cards as if A is being moved onto B in an ace pile. 
-	#Returns true if it is a valid move, false otherwise
-	def CheckPile(self, A, B):
-		if A.Suit() == B.Suit():
-			if B.Value() == (A.Value() - 1):
-				return true
-		else:
-			return false
 
 	#checks validity of a move of a single card
 	def attempt_move(self,stackfrom,indexfrom,stackto):
